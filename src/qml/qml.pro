@@ -19,6 +19,8 @@ solaris-cc*:QMAKE_CXXFLAGS_RELEASE -= -O2
 
 # Ensure this gcc optimization is switched off for mips platforms to avoid trouble with JIT.
 gcc:isEqual(QT_ARCH, "mips"): QMAKE_CXXFLAGS += -fno-reorder-blocks
+# Link with libatomic on riscv32/64
+gcc:if(isEqual(QT_ARCH, "riscv32")|isEqual(QT_ARCH, "riscv64")): LIBS += -latomic
 
 DEFINES += QT_NO_FOREACH
 
